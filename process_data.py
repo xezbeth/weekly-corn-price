@@ -7,3 +7,12 @@ for d in data:
     x = x.split('-')
     x_train.append(x)
     y_train.append(y)
+
+
+    xxx=[]
+    for xx in x:
+        xxx.append(sigmoid(int(xx)))
+        #print(xxx)
+    y = sigmoid(float(y.rstrip()))
+    print(y)
+    x_train.append(xxx)

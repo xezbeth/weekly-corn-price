@@ -1,6 +1,6 @@
 import tensorflow.keras
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense,CuDNNLSTM,Dropout,Flatten
+from tensorflow.keras.layers import Dense,CuDNNLSTM,Dropout,Flatten,BatchNormalization
 import numpy as np
 
 class build_model:
@@ -8,7 +8,11 @@ class build_model:
     def __init__(self,input_shape):
 
         self.model = Sequential()
-        self.model.add(CuDNNLSTM(3,input_shape=input_shape[1:]))
+        self.model.add(CuDNNLSTM(3,input_shape=input_shape[1:],return_sequences=True))
+        self.model.add(CuDNNLSTM(2,return_sequences=True))
+        self.model.add(CuDNNLSTM(1,return_sequences=False))
+        #self.model.add(BatchNormalization(axis=-1, momentum=0.99, epsilon=0.001))
+
         self.model.compile(loss="mse",optimizer="adam",metrics=["accuracy"])
 
 
